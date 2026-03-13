@@ -4,6 +4,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { Card } from "@/components/ui/card";
 
 const AssistirAoVivo = () => {
+  
   return (
     <div className="min-h-screen bg-background">
       <Header />

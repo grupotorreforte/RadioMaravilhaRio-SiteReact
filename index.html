@@ -11,21 +11,27 @@
     <meta property="og:description" content="Sua companhia diária com música, fé e esperança. Ouça ao vivo!" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="" />
-
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="" />
     <meta name="twitter:image" content="" />
+
+      <!--ANALYTICS-->
+      <!-- Google Analytics -->
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-F6EWKM5E44"></script>
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            
+            gtag('js', new Date());
+
+            gtag('config', 'G-F6EWKM5E44', {
+              anonymize_ip: true
+            });
+          </script>
+
   </head>
 
-  <!--ANALYTICS-->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F6EWKM5E44"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-F6EWKM5E44');
-  </script>
 
   <body>
     <div id="root"></div>
