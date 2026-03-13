@@ -29,7 +29,7 @@ const Footer = () => {
             </p> */}
 
             <p className="text-xs text-gray-200 mt-2">
-              © 2025 Rádio 96.1 Maravilha FM — Todos os direitos reservados.
+              © {new Date().getFullYear()} Rádio 96.1 Maravilha FM — Todos os direitos reservados.
             </p>
           </div>
         </div>
