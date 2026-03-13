@@ -2,7 +2,7 @@ class RadioService {
   private listeners: ((playing: boolean) => void)[] = [];
   private isPlaying = false;
   private audio: HTMLAudioElement | null = null;
-  private audioUrl = "https://stm19.srvstm.com:7080/stream";
+  private audioUrl = "https://stm39.srvstm.com:8758/stream"; //trocar stream 
   private isGlobalPlayerActive = false;
 
   private getAudio(): HTMLAudioElement {

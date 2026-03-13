@@ -22,7 +22,7 @@ const Home = () => {
         </section>
 
         {/* Promotional Banner */}
-        <section className="py-8 md:py-12">
+  {/*       <section className="py-8 md:py-12">
           <div className="container mx-auto px-4">
             <a target="_blank" href="https://89maravilhafm.com/sorteio/">
                 <img
@@ -33,7 +33,7 @@ const Home = () => {
                 />
             </a> 
           </div>
-        </section>
+        </section> */}
 
         {/* About Section */}
         <section className="py-12 md:py-20">
@@ -41,23 +41,14 @@ const Home = () => {
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
               <div className="space-y-6 animate-fade-in">
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                  Sobre a Rádio 89.1 Maravilha FM
+                  Sobre a Rádio 96.9 FM
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  A Rádio 89.1 Maravilha FM é a sua companhia diária, levando até
-                  você muito mais do que música: transmitimos fé, esperança e a
-                  Palavra de Deus, sempre com uma programação de excelência feita
-                  para abençoar e transformar vidas.
+                  Rádio Maravilha FM, a sua companhia preferida de todos os dias, levando a Palavra de Deus, através de uma programação de excelência, para abençoar a sua vida!
                 </p>
+                
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Somos uma emissora cristã com a missão de compartilhar o
-                  Evangelho da Paz e estar ao seu lado em todos os momentos,
-                  trazendo mensagens de amor, inspiração e alegria.
-                </p>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Em Belo Horizonte, sintonize 89.1 FM e viva a experiência de ter
-                  a Maravilha FM como parte da sua rotina. Porque aqui, cada canção
-                  e cada palavra são preparadas especialmente para você!
+                  Somos uma emissora cristã e entendemos que a nossa maior missão é sermos propagadores do Evangelho da Paz. No Rio, sintonize em 96.9 FM!
                 </p>
               </div>
               <div className="animate-fade-in">
@@ -99,7 +90,7 @@ const Home = () => {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                   <a
                     target="_blank"
-                    href="https://apps.apple.com/br/app/89-maravilha-fm/id6748237407"
+                    href="https://apps.apple.com/us/app/r%C3%A1dio-maravilha-fm/id6505129832"
                     className="inline-block hover:opacity-80 transition-opacity"
                   >
                     <img
@@ -110,7 +101,7 @@ const Home = () => {
                   </a>
                   <a
                     target="_blank"
-                    href="https://play.google.com/store/apps/details?id=com.claitonbarbosa.maravilhafmbh"
+                    href="https://play.google.com/store/apps/details?id=com.claitonbarbosa.AppMaravilhaFM2025&hl=pt_BR"
                     className="inline-block hover:opacity-80 transition-opacity"
                   >
                     <img

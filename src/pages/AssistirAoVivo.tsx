@@ -2,7 +2,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Card } from "@/components/ui/card";
-import logoWhite from "@/assets/logo-white.png";
 
 const AssistirAoVivo = () => {
   return (
@@ -16,8 +15,8 @@ const AssistirAoVivo = () => {
             {/* STREAM AO VIVO */}
             <div className="aspect-video bg-black relative">
               <iframe
-                src="https://playerv.srvstm.com/video/radioenergia7960//true/false/V1hwT1UyUkhVbkZTV0ZacVRUQnZlVmw2VGxOa1JYaDBWRzVhYVZWVU1Eaz0rUg==/16:9/nao/nao/não"
-                title="Transmissão ao vivo - Rádio Maravilha 89.1 FM"
+                src="https://playerv.srvstm.com/video/radioenergia4279//true/false/YzNSdGRqRXVjM0oyYzNSdExtTnZiUT09K0Q=/16:9/nao/nao/nao" // TROCAR TRANSNMISSAO AO VIVO
+                title="Transmissão ao vivo - Rádio Maravilha 96.9 FM"
                 allow="autoplay; encrypted-media"
                 allowFullScreen
                 className="absolute inset-0 w-full h-full"

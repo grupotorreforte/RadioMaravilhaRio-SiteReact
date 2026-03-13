@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Home, Headphones, Video, Youtube, Instagram, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import logoHeader from "@/assets/89MaravilhaLogoHeader.png";
+import logoHeader from "@/assets/logo_maravilha_topo.png";
 
 
 const Header = () => {
@@ -74,14 +74,14 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Button
+         {/*    <Button
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="text-primary hover:text-primary-light"
             >
               {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-            </Button>
+            </Button> */}
             <a
               href="https://www.youtube.com/@radio89maravilha"
               target="_blank"

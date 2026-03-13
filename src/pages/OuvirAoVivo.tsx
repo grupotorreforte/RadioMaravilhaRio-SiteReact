@@ -9,12 +9,12 @@ import bannerAnuncio from "@/assets/anuncio.png";
 import capaAlbum from "@/assets/capaAlbum.png";
 import { radioService } from "@/lib/radioService";
 
-const API_URL = "https://radiovox.conectastm.com/api-json/Vkc1d1FrNUZNVUpRVkRBOStS";
+const API_URL = "https://radiovox.conectastm.com/api/ODc1OCsw"; // TROCAR API
 
 const OuvirAoVivo = () => {
   const [isPlaying, setIsPlaying] = useState(radioService.getPlayingState());
   const [volume, setVolume] = useState([70]);
-  const [musica, setMusica] = useState("Rádio Maravilha 89.1 FM");
+  const [musica, setMusica] = useState("Rádio Maravilha 96.9 FM");
   const [artista, setArtista] = useState("");
   const [capa, setCapa] = useState(capaAlbum);
 
@@ -36,28 +36,52 @@ useEffect(() => {
 };
 
 
-  useEffect(() => {
-    radioService.setVolume(volume[0] / 100);
-  }, [volume]);
+    useEffect(() => {
+      radioService.setVolume(volume[0] / 100);
+    }, [volume]);
 
-  useEffect(() => {
+    useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await fetch(API_URL);
-        const data = await res.json();
+        const xmlText = await res.text();
 
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(xmlText, "text/xml");
+
+        const musicaAtual =
+          xml.querySelector("musica_atual")?.textContent || "";
+        const capaMusica =
+          xml.querySelector("capa_musica")?.textContent || "";
+
+        // Se estiver tocando apenas o nome da rádio
         if (
-          data.musica_atual.includes("Radio Maravilha") ||
-          data.musica_atual.includes("891 Radio Maravilha FM")
+          musicaAtual.includes("Radio Maravilha") ||
+          musicaAtual.includes("Rádio Maravilha")
         ) {
-          setMusica("Rádio Maravilha 89.1 FM");
+          setMusica("Rádio Maravilha FM");
           setArtista("");
           setCapa(capaAlbum);
-        } else if (data.musica_atual.includes(" - ")) {
-          const [titulo, artistaNome] = data.musica_atual.split(" - ");
+          return;
+        }
+
+        // Se tiver música (formato Artista - Música)
+        if (musicaAtual.includes(" - ")) {
+          const [artistaNome, titulo] = musicaAtual.split(" - ");
+
           setMusica(titulo.trim());
           setArtista(artistaNome.trim());
-          setCapa(data.capa_musica || capaAlbum);
+
+          if (capaMusica && capaMusica !== "") {
+            setCapa(capaMusica);
+          } else {
+            setCapa(capaAlbum);
+          }
+        } else {
+          // fallback
+          setMusica(musicaAtual || "Radio Maravilha FM");
+          setArtista("");
+          setCapa(capaAlbum);
         }
       } catch (err) {
         console.error("Erro ao buscar dados da rádio:", err);
@@ -66,6 +90,7 @@ useEffect(() => {
 
     fetchData();
     const interval = setInterval(fetchData, 30000);
+
     return () => clearInterval(interval);
   }, []);
 
@@ -78,9 +103,7 @@ useEffect(() => {
         <div className="container mx-auto px-10 max-w-4x1">
 
           <Card className="p-8 md:p-12 shadow-card animate-fade-in">
-            <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 text-foreground">
-              Minas Gerais 89.1 FM
-            </h1>
+
 
             <div className="space-y-8">
               <div className="flex justify-center">

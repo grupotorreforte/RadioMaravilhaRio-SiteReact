@@ -4,13 +4,13 @@ import { ChevronDown, ChevronUp, Share2, Play, Pause, X } from "lucide-react";
 import { radioService } from "@/lib/radioService";
 import capaAlbum from "@/assets/capaAlbum.png";
 
-const API_URL = "https://radiovox.conectastm.com/api-json/Vkc1d1FrNUZNVUpRVkRBOStS";
+const API_URL = "https://radiovox.conectastm.com/api/ODc1OCsw";
 
 const PlayerGlobal = () => {
   const location = useLocation();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(radioService.getPlayingState());
-  const [musica, setMusica] = useState("Rádio Maravilha 89.1 FM");
+  const [musica, setMusica] = useState("Rádio Maravilha 96.9 FM");
   const [artista, setArtista] = useState("");
   const [capa, setCapa] = useState(capaAlbum);
   const [isActive, setIsActive] = useState(radioService.getGlobalPlayerActive());
@@ -28,49 +28,77 @@ const PlayerGlobal = () => {
     return unsubscribe;
   }, []);
 
-  useEffect(() => {
-    if (!isActive) return;
+useEffect(() => {
+  if (!isActive) return;
 
-    let mounted = true;
-    const fetchData = async () => {
-      try {
-        const res = await fetch(API_URL);
-        const data = await res.json();
+  let mounted = true;
 
-        if (!mounted) return;
-        if (
-          data.musica_atual.includes("Radio Maravilha") ||
-          data.musica_atual.includes("891 Radio Maravilha FM")
-        ) {
-          setMusica("Rádio Maravilha 89.1 FM");
-          setArtista("");
-          setCapa(capaAlbum);
-        } else if (data.musica_atual.includes(" - ")) {
-          const [titulo, artistaNome] = data.musica_atual.split(" - ");
-          setMusica(titulo.trim());
-          setArtista(artistaNome.trim());
-          setCapa(data.capa_musica || capaAlbum);
-        }
-      } catch (err) {
-        console.error("Erro ao buscar dados da rádio:", err);
+  const fetchData = async () => {
+    try {
+      const res = await fetch(API_URL);
+      const xmlText = await res.text();
+
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(xmlText, "text/xml");
+
+      const musicaAtual =
+        xml.querySelector("musica_atual")?.textContent || "";
+
+      const capaMusica =
+        xml.querySelector("capa_musica")?.textContent || "";
+
+      if (!mounted) return;
+
+      // Quando não tem música tocando
+      if (
+        musicaAtual.includes("Radio Maravilha") ||
+        musicaAtual.includes("Rádio Maravilha")
+      ) {
+        setMusica("Rádio Maravilha FM");
+        setArtista("");
+        setCapa(capaAlbum);
+        return;
       }
-    };
 
-    fetchData();
-    const interval = setInterval(fetchData, 30000);
-    return () => {
-      mounted = false;
-      clearInterval(interval);
-    };
-  }, [isActive]);
+      // Quando tem música (formato Artista - Música)
+      if (musicaAtual.includes(" - ")) {
+        const [artistaNome, titulo] = musicaAtual.split(" - ");
+
+        setMusica(titulo.trim());
+        setArtista(artistaNome.trim());
+
+        if (capaMusica && capaMusica !== "") {
+          setCapa(capaMusica);
+        } else {
+          setCapa(capaAlbum);
+        }
+      } else {
+        // fallback
+        setMusica(musicaAtual || "Rádio Maravilha FM");
+        setArtista("");
+        setCapa(capaAlbum);
+      }
+    } catch (err) {
+      console.error("Erro ao buscar dados da rádio:", err);
+    }
+  };
+
+  fetchData();
+  const interval = setInterval(fetchData, 30000);
+
+  return () => {
+    mounted = false;
+    clearInterval(interval);
+  };
+}, [isActive]);
 
   const togglePlay = () => radioService.toggle();
 
   const handleShare = () => {
     const shareData = {
-      title: "Rádio Maravilha 89.1 FM",
+      title: "Rádio Maravilha 96.9 FM",
       text: "Ouça agora a Rádio Maravilha ao vivo!",
-      url: "https://89maravilhafm.com/site/pages/home/",
+      url: "",
     };
 
     if (navigator.share) {
@@ -103,7 +131,7 @@ const PlayerGlobal = () => {
             <img src={capa} alt="Capa" className="w-10 h-10 rounded-full object-cover" />
           )}
           <div>
-            <h2 className="font-semibold text-sm">Minas Gerais 89.1 FM</h2>
+            <h2 className="font-semibold text-sm">Rio de Janeiro 96.9 FM</h2>
             <p className="text-xs text-gray-300 truncate max-w-[150px]">{musica}</p>
           </div>
         </div>
