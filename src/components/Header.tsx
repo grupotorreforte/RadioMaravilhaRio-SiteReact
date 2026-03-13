@@ -83,7 +83,7 @@ const Header = () => {
               {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
             </Button> */}
             <a
-              href="https://www.youtube.com/@radio89maravilha"
+              href="https://www.youtube.com/@radiomaravilhafm"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:text-primary-light transition-colors"
@@ -91,7 +91,7 @@ const Header = () => {
               <Youtube size={35} />
             </a>
             <a
-              href="https://www.instagram.com/radio89maravilha/"
+              href="https://www.instagram.com/@radiomaravilhafm/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:text-primary-light transition-colors"
