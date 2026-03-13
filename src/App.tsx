@@ -11,11 +11,15 @@ import AssistirAoVivo from "./pages/AssistirAoVivo";
 import NotFound from "./pages/NotFound";
 import PlayerGlobal from "./components/PlayerGlobal";
 import { radioService } from "@/lib/radioService";
-
+declare global {
+  interface Window {
+    gtag: (...args: any[]) => void;
+  }
+}
 const queryClient = new QueryClient();
 const AnalyticsTracker = () => {
   const location = useLocation();
-
+  
   useEffect(() => {
     if (typeof window.gtag === "function") {
       window.gtag("config", "G-F6EWKM5E44", {
